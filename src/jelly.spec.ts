@@ -204,4 +204,11 @@ describe('jelly', () => {
     expect(evaluate(expr, {person: {name: 'Dale Cooper', favoriteDrink: 'coffee'}})).toBe(true)
   })
 
+  test('simple multiply', () => {
+    const expr: Expr = {
+      operator: 'multiply',
+      children: [6, 3]
+    };
+    expect(evaluate(expr)).toBe(18)
+  })
 })

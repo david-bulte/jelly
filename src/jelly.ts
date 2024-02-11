@@ -5,7 +5,7 @@ import {
   GteExpr,
   GtExpr,
   isContextExpr,
-  isOperatorExpr,
+  isOperatorExpr, MultiplyExpr,
   NotExpr,
   OrExpr,
   SumExpr
@@ -17,14 +17,6 @@ export function evaluate(expression: Expr, context?: any) {
 
   function _evaluate(expression: Expr) {
     return getFunction(expression)(expression);
-  }
-
-  function sum(expression: SumExpr) {
-    let result = 0;
-    expression.children.forEach((child: Expr) => {
-      result += getValue(child);
-    });
-    return result;
   }
 
   function eq(expression: EqExpr) {
@@ -59,6 +51,22 @@ export function evaluate(expression: Expr, context?: any) {
     return !getValue(expression.children);
   }
 
+  function sum(expression: SumExpr) {
+    let result = 0;
+    expression.children.forEach((child: Expr) => {
+      result += getValue(child);
+    });
+    return result;
+  }
+
+  function multiply(expression: MultiplyExpr) {
+    let result = 1;
+    expression.children.forEach((child: Expr) => {
+      result *= getValue(child);
+    });
+    return result;
+  }
+
   function getValue(expression: Expr) {
     const f = getFunction(expression);
     return f ? f(expression) : isContextExpr(expression) ? getFromContext(expression) : expression;
@@ -84,27 +92,32 @@ export function evaluate(expression: Expr, context?: any) {
 
   function getFunction(expression: Expr): any | ((expr: Expr) => any) {
     if (isOperatorExpr(expression)) {
-      switch (expression.operator) {
+      const operator = expression.operator;
+      switch (operator) {
         case 'gt':
           return gt;
         case 'gte':
           return gte;
         case 'eq':
           return eq;
-        case 'sum':
-          return sum;
         case 'and':
           return and;
         case 'or':
           return or;
         case 'not':
           return not;
+        case 'sum':
+          return sum;
+        case 'multiply':
+          return multiply;
         default:
-          throw new Error('unknown operator')
+          assertNever(operator)
       }
     }
     return null;
   }
 }
 
-
+function assertNever(operator: never): never {
+  throw new Error("unknown operator " + operator);
+}

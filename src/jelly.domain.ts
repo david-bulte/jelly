@@ -1,4 +1,10 @@
-export type Operator = 'gt'| 'gte'| 'eq'| 'sum'| 'and'| 'or'| 'not'
+export type Operator =
+  // evaluate operators
+  'gt'| 'gte'| 'eq'|
+  // logical operators
+  'and'| 'or'| 'not' |
+  // math operators
+  'sum' | 'multiply';
 
 type OperatorExpr = {
   operator: Operator;
@@ -13,20 +19,7 @@ export function isOperatorExpr(expr: any): expr is OperatorExpr {
   return expr['operator'];
 }
 
-export type OrExpr = EvalExpr & {
-  operator: 'or',
-  children: Expr[],
-}
-
-export type AndExpr = EvalExpr & {
-  operator: 'and',
-  children: Expr[],
-}
-
-export type NotExpr = EvalExpr & {
-  operator: 'not',
-  children: Expr,
-}
+// evaluate expressions
 
 export type EqExpr = EvalExpr & {
   operator: 'eq',
@@ -43,8 +36,32 @@ export type GteExpr = EvalExpr & {
   children: Expr[],
 }
 
+// logical expressions
+
+export type OrExpr = EvalExpr & {
+  operator: 'or',
+  children: Expr[],
+}
+
+export type AndExpr = EvalExpr & {
+  operator: 'and',
+  children: Expr[],
+}
+
+export type NotExpr = EvalExpr & {
+  operator: 'not',
+  children: Expr,
+}
+
+// math expressions
+
 export type SumExpr = {
   operator: 'sum',
+  children: Expr[],
+}
+
+export type MultiplyExpr = {
+  operator: 'multiply',
   children: Expr[],
 }
 
@@ -63,4 +80,12 @@ export function isContextExpr(expr: any): expr is ContextExpr {
   return typeof expr === 'string' && expr.startsWith('{{') && expr.endsWith('}}');
 }
 
-export type Expr = SumExpr | GteExpr | GtExpr | EqExpr | NotExpr | AndExpr | OrExpr | AtomicExpr | ContextExpr;
+export type Expr =
+  // evaluate expressions
+  GteExpr | GtExpr | EqExpr |
+  // logical expressions
+  NotExpr | AndExpr | OrExpr |
+  // math expressions
+  SumExpr | MultiplyExpr |
+  // other expressions
+  AtomicExpr | ContextExpr;
