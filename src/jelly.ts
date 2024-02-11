@@ -11,70 +11,70 @@ import {
   SumExpr
 } from "./jelly.domain.ts";
 
-export function evaluate(expression: Expr, context?: any) {
+export function evaluate(expr: Expr, context?: any) {
 
-  return _evaluate(expression);
+  return _evaluate(expr);
 
-  function _evaluate(expression: Expr) {
-    return getFunction(expression)(expression);
+  function _evaluate(expr: Expr) {
+    return getFunction(expr)(expr);
   }
 
-  function eq(expression: EqExpr) {
-    const left = getValue(expression.children[0]);
-    const right = getValue(expression.children[1]);
-    return left === right ? (expression.success || true) : (expression.fail || false);
+  function eq(expr: EqExpr) {
+    const left = getValue(expr.children[0]);
+    const right = getValue(expr.children[1]);
+    return left === right ? (expr.success || true) : (expr.fail || false);
   }
 
-  function gt(expression: GtExpr) {
-    const left = getValue(expression.children[0]);
-    const right = getValue(expression.children[1]);
-    return left > right ? (expression.success || true) : (expression.fail || false);
+  function gt(expr: GtExpr) {
+    const left = getValue(expr.children[0]);
+    const right = getValue(expr.children[1]);
+    return left > right ? (expr.success || true) : (expr.fail || false);
   }
 
-  function gte(expression: GteExpr) {
-    const left = getValue(expression.children[0]);
-    const right = getValue(expression.children[1]);
-    return left >= right ? (expression.success || true) : (expression.fail || false);
+  function gte(expr: GteExpr) {
+    const left = getValue(expr.children[0]);
+    const right = getValue(expr.children[1]);
+    return left >= right ? (expr.success || true) : (expr.fail || false);
   }
 
-  function nil(expression: NilExpr) {
-    let value = getValue(expression.children);
+  function nil(expr: NilExpr) {
+    let value = getValue(expr.children);
     return value === undefined || value === null;
   }
 
-  function and(expression: AndExpr) {
-    return expression.children.every((child: Expr) => getValue(child))
-      ? (expression.success || true) : (expression.fail || false);
+  function and(expr: AndExpr) {
+    return expr.children.every((child: Expr) => getValue(child))
+      ? (expr.success || true) : (expr.fail || false);
   }
 
-  function or(expression: OrExpr) {
-    return expression.children.some((child: Expr) => getValue(child))
-      ? (expression.success || true) : (expression.fail || false);
+  function or(expr: OrExpr) {
+    return expr.children.some((child: Expr) => getValue(child))
+      ? (expr.success || true) : (expr.fail || false);
   }
 
-  function not(expression: NotExpr) {
-    return !getValue(expression.children);
+  function not(expr: NotExpr) {
+    return !getValue(expr.children);
   }
 
-  function sum(expression: SumExpr) {
+  function sum(expr: SumExpr) {
     let result = 0;
-    expression.children.forEach((child: Expr) => {
+    expr.children.forEach((child: Expr) => {
       result += getValue(child);
     });
     return result;
   }
 
-  function multiply(expression: MultiplyExpr) {
+  function multiply(expr: MultiplyExpr) {
     let result = 1;
-    expression.children.forEach((child: Expr) => {
+    expr.children.forEach((child: Expr) => {
       result *= getValue(child);
     });
     return result;
   }
 
-  function getValue(expression: Expr) {
-    const f = getFunction(expression);
-    return f ? f(expression) : isContextExpr(expression) ? getFromContext(expression) : expression;
+  function getValue(expr: Expr) {
+    const f = getFunction(expr);
+    return f ? f(expr) : isContextExpr(expr) ? getFromContext(expr) : expr;
   }
 
   function getFromContext(expression: ContextExpr) {
@@ -95,9 +95,9 @@ export function evaluate(expression: Expr, context?: any) {
     }
   }
 
-  function getFunction(expression: Expr): any | ((expr: Expr) => any) {
-    if (isOperatorExpr(expression)) {
-      const operator = expression.operator;
+  function getFunction(expr: Expr): any | ((expr: Expr) => any) {
+    if (isOperatorExpr(expr)) {
+      const operator = expr.operator;
       switch (operator) {
         case 'gt':
           return gt;

@@ -1,4 +1,3 @@
-// sum.test.js
 import {describe, expect, test} from 'vitest'
 import {evaluate} from "./jelly.ts";
 import {Expr} from "./jelly.domain.ts";
@@ -166,9 +165,6 @@ describe('jelly', () => {
   })
 
   test('complex', () => {
-    const input1 = {value: 3};
-    const input2 = {value: 2};
-
     const expr: Expr = {
       operator: 'sum',
       children: [
@@ -178,21 +174,22 @@ describe('jelly', () => {
             {
               operator: 'sum',
               children: [
-                {operator: 'eq', children: [input1.value, 2], success: 1, fail: 0},
-                {operator: 'eq', children: [input2.value, 2], success: 1, fail: 0},
+                {operator: 'eq', children: ['{{form.input1.value}}', 2], success: 1, fail: 0},
+                {operator: 'eq', children: ['{{form.input2.value}}', 2], success: 1, fail: 0},
               ],
             },
             1,
           ],
-          success: -0.152,
+          success: 3,
           fail: 0,
         },
-        {operator: 'eq', children: [input1.value, 3], success: -0.074, fail: 0},
-        {operator: 'eq', children: [input2.value, 3], success: -0.166, fail: 0},
+        {operator: 'eq', children: ['{{form.input1.value}}', 3], success: 6, fail: 0},
+        {operator: 'eq', children: ['{{form.input2.value}}', 3], success: 2, fail: 0},
       ],
     };
 
-    expect(evaluate(expr)).toBe(-0.074)
+    const form = {input1: {value: 3}, input2: {value: 2}};
+    expect(evaluate(expr, {form})).toBe(6)
 
   })
 

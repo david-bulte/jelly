@@ -1,5 +1,5 @@
 export type Operator =
-  // evaluate operators
+  // comparison operators
   'gt'| 'gte'| 'eq'| 'nil' |
   // logical operators
   'and'| 'or'| 'not' |
@@ -10,7 +10,7 @@ type OperatorExpr = {
   operator: Operator;
 }
 
-type EvalExpr = {
+type ComparisonExpr = {
   success?: any;
   fail?: any;
 }
@@ -19,41 +19,41 @@ export function isOperatorExpr(expr: any): expr is OperatorExpr {
   return expr?.['operator'];
 }
 
-// evaluate expressions
+// comparison expressions
 
-export type EqExpr = EvalExpr & {
+export type EqExpr = ComparisonExpr & {
   operator: 'eq',
   children: Expr[],
 }
 
-export type GtExpr = EvalExpr & {
+export type GtExpr = ComparisonExpr & {
   operator: 'gt',
   children: Expr[],
 }
 
-export type GteExpr = EvalExpr & {
+export type GteExpr = ComparisonExpr & {
   operator: 'gte',
   children: Expr[],
 }
 
-export type NilExpr = EvalExpr & {
+export type NilExpr = ComparisonExpr & {
   operator: 'nil',
   children: Expr,
 }
 
 // logical expressions
 
-export type OrExpr = EvalExpr & {
+export type OrExpr = ComparisonExpr & {
   operator: 'or',
   children: Expr[],
 }
 
-export type AndExpr = EvalExpr & {
+export type AndExpr = ComparisonExpr & {
   operator: 'and',
   children: Expr[],
 }
 
-export type NotExpr = EvalExpr & {
+export type NotExpr = ComparisonExpr & {
   operator: 'not',
   children: Expr,
 }
@@ -86,7 +86,7 @@ export function isContextExpr(expr: any): expr is ContextExpr {
 }
 
 export type Expr =
-  // evaluate expressions
+  // comparison expressions
   GteExpr | GtExpr | EqExpr | NilExpr |
   // logical expressions
   NotExpr | AndExpr | OrExpr |
