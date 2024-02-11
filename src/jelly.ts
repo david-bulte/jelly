@@ -1,5 +1,5 @@
 import {
-  AndExpr, ContextExpr,
+  AndExpr, ContextExpr, NilExpr,
   EqExpr,
   Expr,
   GteExpr,
@@ -35,6 +35,11 @@ export function evaluate(expression: Expr, context?: any) {
     const left = getValue(expression.children[0]);
     const right = getValue(expression.children[1]);
     return left >= right ? (expression.success || true) : (expression.fail || false);
+  }
+
+  function nil(expression: NilExpr) {
+    let value = getValue(expression.children);
+    return value === undefined || value === null;
   }
 
   function and(expression: AndExpr) {
@@ -100,6 +105,8 @@ export function evaluate(expression: Expr, context?: any) {
           return gte;
         case 'eq':
           return eq;
+        case 'nil':
+          return nil;
         case 'and':
           return and;
         case 'or':

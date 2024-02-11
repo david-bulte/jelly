@@ -211,4 +211,12 @@ describe('jelly', () => {
     };
     expect(evaluate(expr)).toBe(18)
   })
+
+  test('nil check', () => {
+    const expr: Expr = {
+      operator: 'nil',
+      children: null
+    };
+    expect(evaluate(expr)).toBe(true)
+  })
 })

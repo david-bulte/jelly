@@ -1,6 +1,6 @@
 export type Operator =
   // evaluate operators
-  'gt'| 'gte'| 'eq'|
+  'gt'| 'gte'| 'eq'| 'nil' |
   // logical operators
   'and'| 'or'| 'not' |
   // math operators
@@ -16,7 +16,7 @@ type EvalExpr = {
 }
 
 export function isOperatorExpr(expr: any): expr is OperatorExpr {
-  return expr['operator'];
+  return expr?.['operator'];
 }
 
 // evaluate expressions
@@ -34,6 +34,11 @@ export type GtExpr = EvalExpr & {
 export type GteExpr = EvalExpr & {
   operator: 'gte',
   children: Expr[],
+}
+
+export type NilExpr = EvalExpr & {
+  operator: 'nil',
+  children: Expr,
 }
 
 // logical expressions
@@ -65,7 +70,7 @@ export type MultiplyExpr = {
   children: Expr[],
 }
 
-export type AtomicExpr = string | number | boolean;
+export type AtomicExpr = string | number | boolean | null | undefined;
 
 export type ContextExpr =
   `{{${string}}}` |
@@ -82,7 +87,7 @@ export function isContextExpr(expr: any): expr is ContextExpr {
 
 export type Expr =
   // evaluate expressions
-  GteExpr | GtExpr | EqExpr |
+  GteExpr | GtExpr | EqExpr | NilExpr |
   // logical expressions
   NotExpr | AndExpr | OrExpr |
   // math expressions
