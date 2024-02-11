@@ -4,11 +4,8 @@
 
 [//]: # (*"Jelly", by my son Isaak*)
 
-<div>
-     <img style="border-radius: 5%; max-width: 20rem" src="/assets/images/jelly.jpg" alt="painting 'Jelly', by my son Isaak">
-     <br/>
-     *"Jelly", by my son Isaak*
-</div>
+<img width="500" src="/assets/images/jelly.jpg" alt="painting 'Jelly', by my son Isaak">
+*"Jelly", by my son Isaak*
 
 Built as a small side project because what else to do on a lazy 
 sunday afternoon with no [cyclo-cross](https://en.wikipedia.org/wiki/Cyclo-cross) on TV :) ?
