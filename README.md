@@ -1,7 +1,8 @@
 # Jelly - JSON Expression language
 
 Built as a small side project because what else to do on a gray 
-dull weekend with no cyclocross on TV :) ?
+sunday afternoon with no [cyclo-cross](https://en.wikipedia.org/wiki/Cyclo-cross) 
+on TV :) ?
 
 ## Why Jelly? 
 
