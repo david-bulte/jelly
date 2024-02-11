@@ -26,6 +26,8 @@ Currently we have:
 - math expressions: sum, multiply
 - comparison expressions: eq, gt, gte, nil
 
+More info: https://github.com/david-bulte/jelly/blob/master/src/jelly.domain.ts
+
 ## Examples
 
 Here some examples copied from the test suite:
