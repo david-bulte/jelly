@@ -1,8 +1,10 @@
-# Jelly - JSON Expression language
+# Jelly - JSON Expression Language
+
+!["Jelly"](/assets/images/jelly.jpg)
+*"Jelly"*
 
 Built as a small side project because what else to do on a lazy 
-sunday afternoon with no [cyclo-cross](https://en.wikipedia.org/wiki/Cyclo-cross) 
-on TV :) ?
+sunday afternoon with no [cyclo-cross](https://en.wikipedia.org/wiki/Cyclo-cross) on TV :) ?
 
 ## Why Jelly? 
 
