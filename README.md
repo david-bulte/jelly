@@ -5,7 +5,7 @@
 [//]: # (*"Jelly", by my son Isaak*)
 
 <div>
-     <img style="border-radius: 5%; max-width: 20rem" src="/assets/images/jelly.jpg" alt="painting 'Jelly', by my son Isaak">
+     <img width="10rem" src="/assets/images/jelly.jpg" alt="painting 'Jelly', by my son Isaak">
      <br/>
      *"Jelly", by my son Isaak*
 </div>
