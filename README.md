@@ -1,10 +1,6 @@
 # Jelly - JSON Expression Language
 
-[//]: # (!["Jelly"]&#40;/assets/images/jelly.jpg&#41;)
-
-[//]: # (*"Jelly", by my son Isaak*)
-
-<img width="500" src="/assets/images/jelly.jpg" alt="painting 'Jelly', by my son Isaak">
+!["Jelly"](/assets/images/jelly-rounded.png)
 *"Jelly", by my son Isaak*
 
 Built as a small side project because what else to do on a lazy 
