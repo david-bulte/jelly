@@ -1,6 +1,6 @@
 # Jelly - JSON Expression Language
 
-!["Jelly"](/assets/images/jelly-rounded.png)
+!["Jelly"](/assets/images/jelly-rounded.png)  
 *"Jelly", by my son Isaak*
 
 Built as a small side project because what else to do on a lazy 
